@@ -1,10 +1,10 @@
 import React, { useContext, useState } from "react";
 import { Col, Container, Row } from "react-bootstrap";
+import SweetAlert from "react-bootstrap-sweetalert";
 import { useForm } from "react-hook-form";
 import { UserContext } from "../../../App";
 import Sidebar from "../Sidebar/Sidebar";
 import "./Order.css";
-import SweetAlert from "react-bootstrap-sweetalert";
 
 const Order = () => {
   // Hooks for react-form-hooks
@@ -13,7 +13,6 @@ const Order = () => {
   const [formSubmitStatus, setFormSubmitStatus] = useState("");
 
   const onSubmit = (data) => {
-    console.log(data);
     const status = "Pending";
     const formData = new FormData();
     formData.append("name", data.name);
@@ -24,7 +23,7 @@ const Order = () => {
     formData.append("status", status);
     formData.append("file", data.image[0]);
 
-    fetch("https://agency-jahed.herokuapp.com/addOrder", {
+    fetch("http://localhost:5000/addOrder", {
       method: "POST",
       body: formData,
     })

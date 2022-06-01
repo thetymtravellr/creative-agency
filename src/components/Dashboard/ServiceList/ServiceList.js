@@ -2,13 +2,16 @@ import { faTimes } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useContext, useEffect, useState } from "react";
 import { Col, Container, OverlayTrigger, Row, Tooltip } from "react-bootstrap";
+import { useAuthState } from "react-firebase-hooks/auth";
 import LoadingMask from "react-loadingmask";
 import "react-loadingmask/dist/react-loadingmask.css";
 import { UserContext } from "../../../App";
+import auth from "../../../firebase.init";
 import Sidebar from "../Sidebar/Sidebar";
 import "./ServiceList.css";
 
 const ServiceList = () => {
+  const [user] = useAuthState(auth)
   const [serviceList, setServiceList] = useState([]);
   const [isCancelled, setIsCancelled] = useState(false);
   const { loggedInUser } = useContext(UserContext);
@@ -16,18 +19,18 @@ const ServiceList = () => {
 
   useEffect(() => {
     fetch(
-      "https://agency-jahed.herokuapp.com/getOrders?email=" + loggedInUser.email
+      "http://localhost:5000/getOrders?email=" + user.email
     )
       .then((res) => res.json())
       .then((data) => {
         setServiceList(data);
         setLoading(false);
       });
-  }, [loggedInUser.email, isCancelled]);
+  }, [loggedInUser.email, isCancelled, user.email]);
 
   const handelCancel = (id) => {
     setLoading(true);
-    fetch("https://agency-jahed.herokuapp.com/cancelOrder/" + id, {
+    fetch("http://localhost:5000/cancelOrder/" + id, {
       method: "DELETE",
     })
       .then((res) => res.json())

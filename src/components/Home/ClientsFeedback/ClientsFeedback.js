@@ -12,7 +12,7 @@ const ClientsFeedback = () => {
   }, []);
 
   return (
-    <section className="clients-feedback my-5 pt-5">
+    <section id="team" className="clients-feedback my-5 pt-5">
       <Container fluid>
         <h3 className="main-title text-center ">
           Clients <span>Feedback</span>{" "}

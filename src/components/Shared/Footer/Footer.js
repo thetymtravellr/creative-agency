@@ -9,6 +9,7 @@ const Footer = () => {
         padding: "50px 10px",
         width: "100%",
       }}
+      id='contact'
     >
       <Container fluid>
         <Row>

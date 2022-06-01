@@ -43,13 +43,13 @@ const Login = () => {
 
   // Function that loading admins
   useEffect(() => {
-    fetch("https://agency-jahed.herokuapp.com/getAdmins")
+    fetch("http://localhost:5000/getAdmins")
       .then((res) => res.json())
       .then((data) => {
         setAdminList(data);
       });
   }, [user]);
-
+  console.log(adminList);
   const onSubmit = (data) => {
     const newUser = {
       name: data.firstName + " " + data.lastName,
@@ -75,7 +75,7 @@ const Login = () => {
     await createUserWithEmailAndPassword(email, password);
     await updateProfile({ displayName: name });
 
-    const admin = adminList.find((admin) => admin.email === user.email);
+    const admin = adminList.find((admin) => admin?.email === user?.email);
     const newUser = { ...user.email, isAdmin: Boolean(admin) };
     setLoggedInUser(newUser);
   };
