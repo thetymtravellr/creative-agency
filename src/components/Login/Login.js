@@ -8,8 +8,7 @@ import {
   useUpdateProfile
 } from "react-firebase-hooks/auth";
 import { useForm } from "react-hook-form";
-import { Link, useLocation } from "react-router-dom";
-import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { UserContext } from "../../App";
 import auth from "../../firebase.init";
 import "./Login.css";
@@ -17,8 +16,8 @@ import "./Login.css";
 const Login = () => {
   const [user, loading, error] = useAuthState(auth);
 
-  const history = useHistory();
-  // const navigate = useNavigate();
+  // const history = useHistory();
+  const navigate = useNavigate();
   let location = useLocation();
   let from = location?.state?.from?.pathname || "/";
 
@@ -103,10 +102,10 @@ const Login = () => {
     const admin = adminList.find((admin) => admin.email === user.email);
     const newUser = { ...user.email, isAdmin: Boolean(admin) };
     setLoggedInUser(newUser);
-    // history.push(from)
-    newUser.isAdmin
-      ? history.replace("/adminServicesList")
-      : history.replace("/order");
+    newUser.isAdmin ? navigate("/adminServicesList") : navigate("/order")
+    // newUser.isAdmin
+    //   ? history.replace()
+    //   : history.replace();
   }
 
   if (error) {
@@ -120,12 +119,19 @@ const Login = () => {
   return (
     <Container className="login-container my-5">
       <div className="text-center w-lg-75 w-100 mx-auto pr-4 my-4">
-        <img
+        {/* <img
           className="w-25"
           onClick={() => history.push("/")}
           src="https://i.imgur.com/UMV8bTj.png"
           alt=""
+        /> */}
+         <Link to='/'>
+         <img
+          className="w-25"
+          src="https://i.imgur.com/UMV8bTj.png"
+          alt=""
         />
+         </Link>
       </div>
       <div className="form-container">
         <div className="m-auto input-form-container">

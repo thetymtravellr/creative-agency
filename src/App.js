@@ -1,5 +1,5 @@
 import React, { createContext, useState } from "react";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import "./App.css";
 import AddReview from "./components/Dashboard/AddReview/AddReview";
 import AddService from "./components/Dashboard/AddService/AddService";
@@ -20,51 +20,61 @@ function App() {
 
   return (
     <UserContext.Provider value={{ loggedInUser, setLoggedInUser }}>
-      <Router>
-        <Switch>
-          <Route exact path="/">
-            <Home />
-          </Route>
-          <Route path="/home">
-            <Home />
-          </Route>
-          <Route path="/login">
-            <Login />
-          </Route>
-          <Route path="/verifyEmail">
-            <VerifyEmail />
-          </Route>
-          <Route path="/passwordRecovery">
-            <PasswordRecovery />
-          </Route>
-
-          {loggedInUser.isAdmin ? (
-            <>
-              <PrivateRoute path="/makeAdmin">
-                <MakeAdmin />
-              </PrivateRoute>
-              <PrivateRoute path="/addService">
-                <AddService />
-              </PrivateRoute>
-              <PrivateRoute path="/adminServicesList">
-                <AdminServiceList />
-              </PrivateRoute>
-            </>
-          ) : (
-            <>
-              <PrivateRoute path="/order">
-                <Order />
-              </PrivateRoute>
-              <PrivateRoute path="/serviceList">
-                <ServiceList />
-              </PrivateRoute>
-              <PrivateRoute path="/addReview">
-                <AddReview />
-              </PrivateRoute>
-            </>
-          )}
-        </Switch>
-      </Router>
+      <Routes>
+        <Route path="/" element={<Home />}></Route>
+        <Route path="/home" element={<Home />}></Route>
+        <Route path="/login" element={<Login />}></Route>
+        <Route path="/verifyEmail" element={<VerifyEmail />}></Route>
+        <Route path="/passwordRecovery" element={<PasswordRecovery />}></Route>
+        <Route
+          path="/makeAdmin"
+          element={
+            <PrivateRoute>
+              <MakeAdmin />
+            </PrivateRoute>
+          }
+        ></Route>
+        <Route
+          path="/addService"
+          element={
+            <PrivateRoute>
+              <AddService />
+            </PrivateRoute>
+          }
+        ></Route>
+        <Route
+          path="/adminServicesList"
+          element={
+            <PrivateRoute>
+               <AdminServiceList />
+            </PrivateRoute>
+          }
+        ></Route>
+        <Route
+          path="/order"
+          element={
+            <PrivateRoute>
+               <Order />
+            </PrivateRoute>
+          }
+        ></Route>
+        <Route
+          path="/serviceList"
+          element={
+            <PrivateRoute>
+               <ServiceList />
+            </PrivateRoute>
+          }
+        ></Route>
+        <Route
+          path="/addReview"
+          element={
+            <PrivateRoute>
+               <AddReview />
+            </PrivateRoute>
+          }
+        ></Route>
+      </Routes>
     </UserContext.Provider>
   );
 }

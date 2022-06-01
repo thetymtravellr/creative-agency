@@ -8,14 +8,15 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useContext } from "react";
-import { Link, useHistory } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { UserContext } from "../../../App";
 import "./Sidebar.css";
 // import { handleSignOut } from "../../Login/loginManager";
 
 const Sidebar = () => {
   const { loggedInUser, setLoggedInUser } = useContext(UserContext);
-  let history = useHistory();
+  // let history = useHistory();
+  const navigate = useNavigate()
 
   // const signOut = () => {
   //   handleSignOut().then((res) => {
@@ -26,12 +27,14 @@ const Sidebar = () => {
 
   return (
     <div className="sidebar-container ">
+      <Link to='/'>
       <img
-        onClick={() => history.push("/")}
+        // onClick={() => history.push("/")}
         className="w-lg-75 w-100 h-100 mt-4"
         src="https://i.imgur.com/UMV8bTj.png"
         alt=""
       />
+      </Link>
       <div style={{ height: "650" }} className="mt-5 pb-sm-5">
         {loggedInUser.isAdmin ? (
           <>
