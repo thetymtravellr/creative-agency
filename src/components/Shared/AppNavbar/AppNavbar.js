@@ -32,8 +32,8 @@ const AppNavbar = () => {
             ) : (
               <Nav.Link href="/order">Dashboard</Nav.Link>
             )}
-            <Nav.Link href="/">Our Team</Nav.Link>
-            <Nav.Link href="/">Contact Us</Nav.Link>
+            <Nav.Link href="#">Our Team</Nav.Link>
+            <Nav.Link href="#">Contact Us</Nav.Link>
             <Nav>
               {user ? (
                 <Button

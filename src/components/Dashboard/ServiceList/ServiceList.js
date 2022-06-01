@@ -2,11 +2,11 @@ import { faTimes } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useContext, useEffect, useState } from "react";
 import { Col, Container, OverlayTrigger, Row, Tooltip } from "react-bootstrap";
+import LoadingMask from "react-loadingmask";
+import "react-loadingmask/dist/react-loadingmask.css";
 import { UserContext } from "../../../App";
 import Sidebar from "../Sidebar/Sidebar";
 import "./ServiceList.css";
-import LoadingMask from "react-loadingmask";
-import "react-loadingmask/dist/react-loadingmask.css";
 
 const ServiceList = () => {
   const [serviceList, setServiceList] = useState([]);
@@ -39,6 +39,7 @@ const ServiceList = () => {
   };
 
   return (
+
     <Container fluid>
       <Row>
         <Col xs={2}>

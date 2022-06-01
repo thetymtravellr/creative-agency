@@ -7,9 +7,12 @@ import {
   faUserPlus
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { signOut } from "firebase/auth";
 import React, { useContext } from "react";
+import { Button } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
 import { UserContext } from "../../../App";
+import auth from "../../../firebase.init";
 import "./Sidebar.css";
 // import { handleSignOut } from "../../Login/loginManager";
 
@@ -95,14 +98,14 @@ const Sidebar = () => {
         )}
 
         <div className="my-5"></div>
-        <Link
-          to=""
-          // onClick={signOut}
+        <Button onClick={()=>signOut(auth)} variant="danger">LogoOut <FontAwesomeIcon title="LogOut" icon={faSignOutAlt}></FontAwesomeIcon></Button>
+        {/* <button
+          
           style={{ color: "red", marginTop: "50px" }}
         >
-          <FontAwesomeIcon title="LogOut" icon={faSignOutAlt}></FontAwesomeIcon>
+          
           &nbsp;&nbsp;<span className="d-md-inline-block d-none">LogOut</span>
-        </Link>
+        </button> */}
 
         <br />
       </div>
