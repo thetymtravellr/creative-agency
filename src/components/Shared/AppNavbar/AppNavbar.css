@@ -1,0 +1,35 @@
+.nav-login-button {
+  background-color: #111430 !important;
+  color: white !important;
+}
+
+.logo {
+  width: 35%;
+}
+
+nav a {
+  color: black !important;
+  margin: auto 10px !important;
+  font-size: 17px;
+}
+
+@media screen and (max-width: 775px) {
+  .logo {
+    width: 200px;
+  }
+
+  .nav-container {
+    position: absolute;
+  }
+
+  .navbar-nav {
+    background-color: rgb(241, 218, 152);
+    padding: 3% 20% !important;
+  }
+}
+
+@media screen and (max-width: 430px) {
+  .logo {
+    width: 130px;
+  }
+}

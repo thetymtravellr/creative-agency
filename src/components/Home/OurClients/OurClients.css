@@ -1,0 +1,14 @@
+.our-client img {
+  height: 70px;
+  width: 80%;
+}
+
+@media screen and (max-width: 430px) {
+  .our-client img {
+    width: 100%;
+  }
+
+  .our-client {
+    margin: auto 10px;
+  }
+}

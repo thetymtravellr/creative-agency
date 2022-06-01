@@ -1,0 +1,8 @@
+select {
+  border: 0px !important;
+  font-weight: 500;
+}
+
+select:focus {
+  outline: 0 !important;
+}

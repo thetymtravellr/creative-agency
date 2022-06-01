@@ -1,0 +1,93 @@
+.form-container {
+  margin: auto;
+  width: 400px;
+  padding-top: 3%;
+  border-radius: 8px;
+  padding-bottom: 15px;
+  -moz-box-shadow: inset 0 0 5px gray;
+  -webkit-box-shadow: inset 0 0 5px gray;
+  box-shadow: inset 0 0 5px gray;
+}
+.signing-form {
+  width: 360px;
+}
+.form-container input {
+  width: 360;
+  margin: 12px 0;
+  height: 40px;
+  background-color: #e4e1e180;
+  border-radius: 5px;
+}
+
+.form-img {
+  width: 100%;
+}
+
+.error {
+  color: red;
+}
+
+.toggle-btn {
+  color: #f6b204 !important;
+}
+
+.or-line {
+  width: 90%;
+  border-bottom: 1px solid;
+  text-align: center;
+  line-height: 0.1em;
+  margin: 10px 0px 20px 15px;
+}
+
+.or-line span {
+  background-color: white;
+  padding: 0 2%;
+}
+
+.login-alternative {
+  width: 90%;
+  height: 33px;
+  border-radius: 20px;
+  border: 1px solid;
+  margin-bottom: 15px;
+  margin: 10px auto;
+}
+
+.login-alternative img {
+  width: 28px;
+  padding: 4px 4px;
+  float: left;
+}
+
+.login-alternative h6 {
+  float: left;
+  text-align: center;
+  width: 250px;
+}
+
+.input-form-container {
+  width: 90%;
+}
+
+@media only screen and (max-width: 430px) {
+  .form-container {
+    width: 95%;
+    margin: auto;
+  }
+  .signing-form {
+    width: 96%;
+    margin: auto;
+  }
+
+  .form-container h4 {
+    text-align: center;
+  }
+
+  .form-container input {
+    width: 99%;
+  }
+
+  .input-form-container {
+    width: 95%;
+  }
+}

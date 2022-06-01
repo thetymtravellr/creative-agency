@@ -1,0 +1,11 @@
+.main-title span {
+  color: #7ab259;
+}
+
+.single-service img {
+  width: 40%;
+}
+
+.single-service {
+  box-shadow: 2px 2px 4px gray;
+}

@@ -1,0 +1,27 @@
+.single-feedback {
+  padding: 8%;
+}
+
+.review-img {
+  height: 65px;
+  width: 65px;
+}
+
+@media screen and (max-width: 775px) {
+  .review-img {
+    height: 60px;
+    width: 60px;
+    margin-right: 10px;
+  }
+
+  .single-feedback {
+    padding: 0%;
+  }
+
+  .feedback-name {
+    font-size: 16px;
+  }
+  .feedback-designation {
+    font-size: 14px;
+  }
+}

@@ -1,0 +1,23 @@
+.swiper-slide img {
+  width: 60%;
+}
+
+.swiper-slide {
+  float: left;
+  width: 45% !important;
+  list-style-type: none;
+  margin-bottom: 50px;
+}
+
+.works-section {
+  background-color: #111430;
+  margin: 50px 0 !important;
+}
+
+.swiper-pagination-bullet {
+  width: 10px !important;
+  height: 10px !important;
+}
+.swiper-pagination-bullet-active {
+  background-color: #fbd062 !important;
+}

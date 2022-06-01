@@ -1,0 +1,35 @@
+.single-client-service {
+  width: 100%;
+  padding: 5% 8%;
+  box-shadow: 1px 1px 3px gray;
+  border-radius: 10px;
+  background-color: white;
+}
+
+.single-client-service img {
+  width: 80px;
+  height: 80px;
+  margin-bottom: 15px;
+  border-radius: 50%;
+}
+
+.service-btn {
+  border-radius: 5px;
+  width: 100px;
+  padding: 7px 0;
+  text-align: center;
+  border: 0px;
+}
+
+.btn-Pending {
+  color: #ff4545;
+  background-color: #ffe3e3;
+}
+.btn-Done {
+  color: #009444;
+  background-color: #c6ffe0;
+}
+.btn-OnProcess {
+  color: #f68e04;
+  background-color: #f3d4ace1;
+}

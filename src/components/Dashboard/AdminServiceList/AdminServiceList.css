@@ -1,0 +1,15 @@
+.table-head-row {
+  background-color: rgba(207, 209, 202, 0.644) !important;
+}
+
+.text-Pending {
+  color: #ff4545;
+}
+
+.text-Done {
+  color: #009444;
+}
+
+.text-OnProcess {
+  color: #ffbd3e;
+}
