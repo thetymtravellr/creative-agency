@@ -1,9 +1,9 @@
 import React, { useContext, useState } from "react";
 import { Col, Container, Row } from "react-bootstrap";
+import SweetAlert from "react-bootstrap-sweetalert";
 import { useForm } from "react-hook-form";
 import { UserContext } from "../../../App";
 import Sidebar from "../Sidebar/Sidebar";
-import SweetAlert from "react-bootstrap-sweetalert";
 
 const AddService = () => {
   const { register, handleSubmit, errors } = useForm();
@@ -15,8 +15,9 @@ const AddService = () => {
     formData.append("title", data.title);
     formData.append("details", data.details);
     formData.append("file", data.logo[0]);
-
-    fetch("https://agency-jahed.herokuapp.com/addService", {
+    console.log(formData);
+    
+    fetch("http://localhost:5000/addService", {
       method: "POST",
       body: formData,
     })

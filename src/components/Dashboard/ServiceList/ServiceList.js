@@ -16,7 +16,7 @@ const ServiceList = () => {
   const [isCancelled, setIsCancelled] = useState(false);
   const { loggedInUser } = useContext(UserContext);
   const [loading, setLoading] = useState(true);
-
+  console.log(user.email);
   useEffect(() => {
     fetch(
       "http://localhost:5000/getOrders?email=" + user.email

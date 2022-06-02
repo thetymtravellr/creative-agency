@@ -16,7 +16,6 @@ import "./Login.css";
 const Login = () => {
   const [user, loading, error] = useAuthState(auth);
 
-  // const history = useHistory();
   const navigate = useNavigate();
   let location = useLocation();
   let from = location?.state?.from?.pathname || "/";
@@ -50,6 +49,18 @@ const Login = () => {
       });
   }, [user]);
   console.log(adminList);
+  
+  // const signIn = (email, password) => {
+  //   signInWithEmailAndPassword(email, password);
+
+  //   // if(emailUser) {
+  //   //   const admin = adminList.find((admin) => admin.email === user?.email);
+  //   //   const newUser = { ...user?.email, isAdmin: Boolean(admin) };
+  //   //   setLoggedInUser(newUser);
+  //   //   setErrorMessage("");
+  //   // }
+  // };
+
   const onSubmit = (data) => {
     const newUser = {
       name: data.firstName + " " + data.lastName,
@@ -63,7 +74,7 @@ const Login = () => {
           newUser.email,
           newUser.password
         )
-      : signIn(newUser.email, newUser.password);
+      : signInWithEmailAndPassword(newUser.email, newUser.password);
   };
 
   // state for storing logged in user data
@@ -76,36 +87,17 @@ const Login = () => {
     await updateProfile({ displayName: name });
 
     const admin = adminList.find((admin) => admin?.email === user?.email);
-    const newUser = { ...user.email, isAdmin: Boolean(admin) };
+    const newUser = { ...user?.email, isAdmin: Boolean(admin) };
     setLoggedInUser(newUser);
   };
 
-  const signIn = (email, password) => {
 
-    signInWithEmailAndPassword(email, password)
-    .then((res) => {
-      if (typeof res === "string") {
-        setErrorMessage(res);
-      } else {
-        const admin = adminList.find((admin) => admin.email === res.email);
-        const newUser = { ...res, isAdmin: Boolean(admin) };
-        setLoggedInUser(newUser);
-        setErrorMessage("");
-      }
-    })
-    .catch((error) => {
-      console.log(error);
-    });
-  };
 
   if (user) {
     const admin = adminList.find((admin) => admin.email === user.email);
     const newUser = { ...user.email, isAdmin: Boolean(admin) };
     setLoggedInUser(newUser);
-    newUser.isAdmin ? navigate("/adminServicesList") : navigate("/order")
-    // newUser.isAdmin
-    //   ? history.replace()
-    //   : history.replace();
+    newUser.isAdmin ? navigate("/adminServicesList") : navigate("/order");
   }
 
   if (error) {
@@ -125,13 +117,9 @@ const Login = () => {
           src="https://i.imgur.com/UMV8bTj.png"
           alt=""
         /> */}
-         <Link to='/'>
-         <img
-          className="w-25"
-          src="https://i.imgur.com/UMV8bTj.png"
-          alt=""
-        />
-         </Link>
+        <Link to="/">
+          <img className="w-25" src="https://i.imgur.com/UMV8bTj.png" alt="" />
+        </Link>
       </div>
       <div className="form-container">
         <div className="m-auto input-form-container">

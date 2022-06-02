@@ -1,5 +1,3 @@
-import { faChevronDown } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useState } from "react";
 import "./AdminServicesTableRow.css";
 
@@ -10,13 +8,16 @@ const AdminServicesTableRow = ({ service }) => {
     const newSelected = e.target.value;
     setSelectedStatus(newSelected);
 
-    const formData = new FormData();
-    formData.append("id", service._id);
-    formData.append("status", e.target.value);
+    const newValue = {
+      status : newSelected
+    }
 
-    fetch("https://agency-jahed.herokuapp.com/updateOrderStatus", {
-      method: "PATCH",
-      body: formData,
+     fetch(`http://localhost:5000/updateOrderStatus/${service._id}`, {
+      method: "PUT",
+      headers:{
+        'content-type':'application/json'
+      },
+      body: JSON.stringify({newValue}),
     })
       .then((res) => res.json())
       .then((data) => {

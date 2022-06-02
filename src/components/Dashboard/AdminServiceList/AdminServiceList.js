@@ -1,26 +1,29 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Col, Container, Row, Table } from "react-bootstrap";
+import { useAuthState } from "react-firebase-hooks/auth";
+import LoadingMask from "react-loadingmask";
+import "react-loadingmask/dist/react-loadingmask.css";
 import { UserContext } from "../../../App";
+import auth from "../../../firebase.init";
 import Sidebar from "../Sidebar/Sidebar";
 import "./AdminServiceList.css";
 import AdminServicesTableRow from "./AdminServicesTableRow/AdminServicesTableRow";
-import LoadingMask from "react-loadingmask";
-import "react-loadingmask/dist/react-loadingmask.css";
 
 const AdminServiceList = () => {
+  const [user] = useAuthState(auth)
   const [serviceList, setServiceList] = useState([]);
   const { loggedInUser } = useContext(UserContext);
   const [loading, setLoading] = useState(true);
   const [searchText, setSearchText] = useState("");
 
   useEffect(() => {
-    fetch("https://agency-jahed.herokuapp.com/getOrders?email=")
+    fetch(`http://localhost:5000/getOrders?email=${user?.email}`)
       .then((res) => res.json())
       .then((data) => {
         setServiceList(data);
         setLoading(false);
       });
-  }, []);
+  }, [user.email]);
 
   const handleOnBlur = (e) => {
     setSearchText(e.target.value);
