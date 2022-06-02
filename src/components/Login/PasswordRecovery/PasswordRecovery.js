@@ -1,21 +1,21 @@
 import React, { useState } from "react";
 import { Container } from "react-bootstrap";
+import { useSendPasswordResetEmail } from "react-firebase-hooks/auth";
 import { useForm } from "react-hook-form";
+import auth from "../../../firebase.init";
 import AppNavbar from "../../Shared/AppNavbar/AppNavbar";
 // import { handlePasswordReset } from "../loginManager";
 
 const PasswordRecovery = () => {
   const [resetMessage, setResetMessage] = useState("");
+  const [sendPasswordResetEmail, sending, error] = useSendPasswordResetEmail(
+    auth
+  );
 
   const { register, handleSubmit, errors } = useForm();
-  const onSubmit = (data) => {
-    // handlePasswordReset(data.resetEmail).then((res) => {
-    //   if (res) {
-    //     setResetMessage(res);
-    //   } else {
-    //     setResetMessage("Please check your email");
-    //   }
-    // });
+  const onSubmit = async (data) => {
+    await sendPasswordResetEmail(data.email);
+    setResetMessage("Please check your email");
   };
 
   return (

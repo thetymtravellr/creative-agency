@@ -48,18 +48,6 @@ const Login = () => {
         setAdminList(data);
       });
   }, [user]);
-  console.log(adminList);
-  
-  // const signIn = (email, password) => {
-  //   signInWithEmailAndPassword(email, password);
-
-  //   // if(emailUser) {
-  //   //   const admin = adminList.find((admin) => admin.email === user?.email);
-  //   //   const newUser = { ...user?.email, isAdmin: Boolean(admin) };
-  //   //   setLoggedInUser(newUser);
-  //   //   setErrorMessage("");
-  //   // }
-  // };
 
   const onSubmit = (data) => {
     const newUser = {
@@ -91,11 +79,10 @@ const Login = () => {
     setLoggedInUser(newUser);
   };
 
-
-
-  if (user) {
+  if (user || emailUser) {
     const admin = adminList.find((admin) => admin.email === user.email);
     const newUser = { ...user.email, isAdmin: Boolean(admin) };
+    console.log(newUser, ...user.email);
     setLoggedInUser(newUser);
     newUser.isAdmin ? navigate("/adminServicesList") : navigate("/order");
   }
