@@ -32,7 +32,7 @@ const AdminServiceList = () => {
   const handleSearchClick = () => {
     setLoading(true);
     fetch(
-      "https://agency-jahed.herokuapp.com/searchInOrder?searchTxt=" + searchText
+      "https://infinite-wave-15770.herokuapp.com/searchInOrder?searchTxt=" + searchText
     )
       .then((res) => res.json())
       .then((data) => {

@@ -5,12 +5,14 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import { Link } from "react-router-dom";
 import { UserContext } from "../../../App";
 import auth from "../../../firebase.init";
+import useAdmin from "../../../hooks/useAdmin";
 import "./AppNavbar.css";
 
 const AppNavbar = () => {
-  const [user] = useAuthState(auth);
   const { loggedInUser } = useContext(UserContext);
-
+  const [user,loading,error] = useAuthState(auth)
+  const [isAdmin] = useAdmin(user)
+  console.log(isAdmin);
   return (
     <Container className="nav-container" fluid>
       <Navbar collapseOnSelect expand="lg">
@@ -27,8 +29,8 @@ const AppNavbar = () => {
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="ml-auto">
             <Nav.Link href="/">Home</Nav.Link>
-            {loggedInUser?.email?.isAdmin ? (
-              <Nav.Link href="/serviceList">Dashboard</Nav.Link>
+            {isAdmin ? (
+              <Nav.Link href="/adminServicesList">Dashboard</Nav.Link>
             ) : (
               <Nav.Link href="/order">Dashboard</Nav.Link>
             )}

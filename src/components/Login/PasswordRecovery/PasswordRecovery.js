@@ -18,6 +18,10 @@ const PasswordRecovery = () => {
     setResetMessage("Please check your email");
   };
 
+  if(error){
+    console.log(error);
+  }
+
   return (
     <Container fluid>
       <AppNavbar />

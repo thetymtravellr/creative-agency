@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Container } from "react-bootstrap";
 import {
   useAuthState,
@@ -9,19 +9,21 @@ import {
 } from "react-firebase-hooks/auth";
 import { useForm } from "react-hook-form";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { UserContext } from "../../App";
 import auth from "../../firebase.init";
 import "./Login.css";
 
 const Login = () => {
   const [user, loading, error] = useAuthState(auth);
-
   const navigate = useNavigate();
-  let location = useLocation();
-  let from = location?.state?.from?.pathname || "/";
+  const location = useLocation();
+  const from = location?.state?.from?.pathname || '/'
+  const [isNewUser, setIsNewUser] = useState(true);
 
+  const { register, handleSubmit, errors, getValues } = useForm();
   const [signInWithEmailAndPassword, emailUser, emailLoading, emailError] =
     useSignInWithEmailAndPassword(auth);
+  const [updateProfile, updating, updateError] = useUpdateProfile(auth);
+  const [signInWithGoogle, gUser, gLoading, gError] = useSignInWithGoogle(auth);
 
   const [
     createUserWithEmailAndPassword,
@@ -30,61 +32,21 @@ const Login = () => {
     createUsererror,
   ] = useCreateUserWithEmailAndPassword(auth);
 
-  const [updateProfile, updating, updateError] = useUpdateProfile(auth);
+  const onSubmit = async (data) => {
+    const name = data.firstName + " " + data.lastName;
+    const email = data.email;
+    const password = data.password;
 
-  const [signInWithGoogle, gUser, gLoading, gError] = useSignInWithGoogle(auth);
-
-  // Hooks for react-form-hooks
-  const { register, handleSubmit, errors, getValues } = useForm();
-  // state for toggling new user and registered user
-  const [isNewUser, setIsNewUser] = useState(true);
-  const [adminList, setAdminList] = useState([]);
-
-  // Function that loading admins
-  useEffect(() => {
-    fetch("http://localhost:5000/getAdmins")
-      .then((res) => res.json())
-      .then((data) => {
-        setAdminList(data);
-      });
-  }, [user]);
-
-  const onSubmit = (data) => {
-    const newUser = {
-      name: data.firstName + " " + data.lastName,
-      email: data.email,
-      password: data.password,
-    };
-
-    isNewUser
-      ? createWithEmailAndPassword(
-          newUser.name,
-          newUser.email,
-          newUser.password
-        )
-      : signInWithEmailAndPassword(newUser.email, newUser.password);
+    if (isNewUser) {
+      await createUserWithEmailAndPassword(email, password);
+      await updateProfile({ displayName: name });
+    } else {
+      signInWithEmailAndPassword(email, password);
+    }
   };
-
-  // state for storing logged in user data
-  const { setLoggedInUser } = useContext(UserContext);
-
-  const [errorMessage, setErrorMessage] = useState("");
-
-  const createWithEmailAndPassword = async (name, email, password) => {
-    await createUserWithEmailAndPassword(email, password);
-    await updateProfile({ displayName: name });
-
-    const admin = adminList.find((admin) => admin?.email === user?.email);
-    const newUser = { ...user?.email, isAdmin: Boolean(admin) };
-    setLoggedInUser(newUser);
-  };
-
-  if (user || emailUser) {
-    const admin = adminList.find((admin) => admin.email === user.email);
-    const newUser = { ...user.email, isAdmin: Boolean(admin) };
-    console.log(newUser, ...user.email);
-    setLoggedInUser(newUser);
-    newUser.isAdmin ? navigate("/adminServicesList") : navigate("/order");
+  
+  if (user) {
+    navigate(from,{replace: true});
   }
 
   if (error) {
@@ -92,7 +54,7 @@ const Login = () => {
   }
 
   if (loading) {
-    console.log("loading");
+    return <p>Loading</p>;
   }
 
   return (

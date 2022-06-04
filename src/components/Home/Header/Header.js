@@ -1,8 +1,12 @@
 import React from "react";
 import { Button, Col, Container, Row } from "react-bootstrap";
+import { useAuthState } from "react-firebase-hooks/auth";
+import auth from "../../../firebase.init";
+import useAdmin from "../../../hooks/useAdmin";
 import "./Header.css";
 
 const Header = () => {
+ 
   return (
     <header>
       <Container className="d-flex align-items-center header-container">

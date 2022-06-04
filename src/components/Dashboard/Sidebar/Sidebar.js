@@ -4,42 +4,36 @@ import {
   faShoppingCart,
   faSignOutAlt,
   faStickyNote,
-  faUserPlus
+  faUserPlus,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { signOut } from "firebase/auth";
-import React, { useContext } from "react";
+import React from "react";
 import { Button } from "react-bootstrap";
+import { useAuthState } from "react-firebase-hooks/auth";
 import { Link, useNavigate } from "react-router-dom";
-import { UserContext } from "../../../App";
 import auth from "../../../firebase.init";
+import useAdmin from "../../../hooks/useAdmin";
 import "./Sidebar.css";
 // import { handleSignOut } from "../../Login/loginManager";
 
 const Sidebar = () => {
-  const { loggedInUser, setLoggedInUser } = useContext(UserContext);
-  // let history = useHistory();
-  const navigate = useNavigate()
-
-  // const signOut = () => {
-  //   handleSignOut().then((res) => {
-  //     setLoggedInUser(res);
-  //     history.replace("/");
-  //   });
-  // };
+  const [user] = useAuthState(auth);
+  const [isAdmin] = useAdmin(user);
+  const navigate = useNavigate();
 
   return (
     <div className="sidebar-container ">
-      <Link to='/'>
-      <img
-        // onClick={() => history.push("/")}
-        className="w-lg-75 w-100 h-100 mt-4"
-        src="https://i.imgur.com/UMV8bTj.png"
-        alt=""
-      />
+      <Link to="/">
+        <img
+          onClick={() => navigate("/")}
+          className="w-lg-75 w-100 h-100 mt-4"
+          src="https://i.imgur.com/UMV8bTj.png"
+          alt=""
+        />
       </Link>
       <div style={{ height: "650" }} className="mt-5 pb-sm-5">
-        {loggedInUser.isAdmin ? (
+        {isAdmin && (
           <>
             <Link to="/adminServicesList">
               <FontAwesomeIcon
@@ -66,7 +60,8 @@ const Sidebar = () => {
               <span className="d-md-inline-block d-none">MakeAdmin</span>
             </Link>
           </>
-        ) : (
+        )}
+        {!isAdmin && (
           <>
             <Link to="/order">
               <FontAwesomeIcon
@@ -98,7 +93,10 @@ const Sidebar = () => {
         )}
 
         <div className="my-5"></div>
-        <Button onClick={()=>signOut(auth)} variant="danger">LogoOut <FontAwesomeIcon title="LogOut" icon={faSignOutAlt}></FontAwesomeIcon></Button>
+        <Button onClick={() => signOut(auth)} variant="danger">
+          LogoOut{" "}
+          <FontAwesomeIcon title="LogOut" icon={faSignOutAlt}></FontAwesomeIcon>
+        </Button>
         {/* <button
           
           style={{ color: "red", marginTop: "50px" }}

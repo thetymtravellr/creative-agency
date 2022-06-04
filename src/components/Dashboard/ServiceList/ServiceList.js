@@ -14,9 +14,9 @@ const ServiceList = () => {
   const [user] = useAuthState(auth)
   const [serviceList, setServiceList] = useState([]);
   const [isCancelled, setIsCancelled] = useState(false);
-  const { loggedInUser } = useContext(UserContext);
+  const {loggedInUser } = useContext(UserContext);
   const [loading, setLoading] = useState(true);
-  console.log(user.email);
+
   useEffect(() => {
     fetch(
       "http://localhost:5000/getOrders?email=" + user.email
@@ -42,7 +42,6 @@ const ServiceList = () => {
   };
 
   return (
-
     <Container fluid>
       <Row>
         <Col xs={2}>

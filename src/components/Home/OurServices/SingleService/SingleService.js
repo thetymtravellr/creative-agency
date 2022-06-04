@@ -1,5 +1,5 @@
 import React from "react";
-import { useSpring, animated } from "react-spring";
+import { animated, useSpring } from "react-spring";
 import "./SingleService.css";
 
 const calc = (x, y) => [
@@ -20,7 +20,7 @@ const SingleService = ({ service }) => {
     <animated.div
       onMouseMove={({ clientX: x, clientY: y }) => set({ xys: calc(x, y) })}
       onMouseLeave={() => set({ xys: [0, 0, 1] })}
-      style={{ transform: props.xys.interpolate(trans) }}
+      style={{ transform: props.xys?.interpolate(trans) }}
     >
       <div className="text-center p-3 single-service">
         <img src={`data:image/jpeg;base64,${service.image.img}`} alt="" />
